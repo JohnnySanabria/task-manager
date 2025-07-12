@@ -32,7 +32,17 @@ export class TaskFormComponent {
       this.editMode = true;
       this.taskSvc.getTasks().subscribe((tasks) => {
         const match = tasks.find((t) => t._id === this.taskId);
-        if (match) this.form.patchValue(match);
+        if (match) {
+          const formattedDate = match.dueDate
+            ? match.dueDate.substring(0, 10)
+            : null;
+          this.form.patchValue({
+            name: match.name,
+            description: match.description,
+            dueDate: formattedDate,
+            status: match.status,
+          });
+        }
       });
     }
   }
