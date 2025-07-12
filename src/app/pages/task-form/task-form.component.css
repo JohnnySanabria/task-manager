@@ -1,0 +1,15 @@
+form input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    height: auto;
+}
+
+form {
+    background-color: whitesmoke;
+    padding: 20px;
+    padding-top: 5px;
+}

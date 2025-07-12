@@ -1,0 +1,11 @@
+<a class="btn btn-success" [routerLink]="['/tasks/create']">Create Task</a>
+<hr />
+<div class="row">
+  <div class="col-md-5">
+    <app-task-list></app-task-list>
+  </div>
+
+  <div class="col-md-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>{{ editMode ? "Edit Task" : "Create Task" }}</h2>
+  <input
+    formControlName="name"
+    placeholder="Name"
+    required
+    class="form-control"
+  />
+  <textarea
+    formControlName="description"
+    placeholder="Description"
+    class="form-control"
+  ></textarea>
+  <input formControlName="dueDate" type="date" class="form-control" />
+  <select formControlName="status" class="form-control">
+    <option>Pending</option>
+    <option>In Progress</option>
+    <option>Completed</option>
+  </select>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

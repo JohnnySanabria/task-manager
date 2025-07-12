@@ -1,0 +1,45 @@
+<div *ngIf="tasks$ | async as tasks">
+  @for (task of tasks; track task._id) {
+  <div class="list-group">
+    <a
+      routerLinkActive="active"
+      [routerLink]="['/tasks/edit', task._id]"
+      class="list-group-item active"
+    >
+      <div class="row">
+        <div class="col-md-8">
+          <h4 class="list-group-item-heading">{{ task.name }}</h4>
+          <p class="list-group-item-text">{{ task.description }}</p>
+        </div>
+        <div class="col-md-4">
+          <p class="list-group-item-text">
+            <strong>Due:</strong> {{ task.dueDate | date }}
+          </p>
+          <p class="list-group-item-text">
+            <strong>Status:</strong> {{ task.status }}
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <!-- <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ task.name }}</h3>
+    </div>
+    <div class="panel-body">
+      <p>{{ task.description }}</p>
+      <p><strong>Due:</strong> {{ task.dueDate | date }}</p>
+      <div class="btn-group">
+        <a
+          class="btn btn-primary btn-sm"
+          [routerLink]="['/tasks/edit', task._id]"
+          >Edit</a
+        >
+        <button class="btn btn-danger btn-sm" (click)="onDelete(task._id)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div> -->
+  }
+</div>
