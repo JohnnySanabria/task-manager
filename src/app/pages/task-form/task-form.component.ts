@@ -27,24 +27,26 @@ export class TaskFormComponent {
       dueDate: [''],
       status: [''],
     });
-    this.taskId = this.route.snapshot.paramMap.get('id');
-    if (this.taskId) {
-      this.editMode = true;
-      this.taskSvc.getTasks().subscribe((tasks) => {
-        const match = tasks.find((t) => t._id === this.taskId);
-        if (match) {
-          const formattedDate = match.dueDate
-            ? match.dueDate.substring(0, 10)
-            : null;
-          this.form.patchValue({
-            name: match.name,
-            description: match.description,
-            dueDate: formattedDate,
-            status: match.status,
-          });
-        }
-      });
-    }
+    this.route.paramMap.subscribe((params) => {
+      this.taskId = params.get('id');
+      if (this.taskId) {
+        this.editMode = true;
+        this.taskSvc.getTasks().subscribe((tasks) => {
+          const match = tasks.find((t) => t._id === this.taskId);
+          if (match) {
+            const formattedDate = match.dueDate
+              ? match.dueDate.substring(0, 10)
+              : null;
+            this.form.patchValue({
+              name: match.name,
+              description: match.description,
+              dueDate: formattedDate,
+              status: match.status,
+            });
+          }
+        });
+      }
+    });
   }
   onSubmit() {
     const task = this.form.value;

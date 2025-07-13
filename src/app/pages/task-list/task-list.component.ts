@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { AsyncPipe, NgIf, DatePipe } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-task-list',
   imports: [AsyncPipe, NgIf, DatePipe, RouterModule],
@@ -13,10 +13,16 @@ import { RouterModule } from '@angular/router';
 export class TaskListComponent {
   tasks$: Observable<Task[]>;
 
-  constructor(private taskSvc: TaskService) {}
+  constructor(private taskSvc: TaskService, private router: Router) {}
 
   ngOnInit() {
     this.tasks$ = this.taskSvc.getTasks();
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.tasks$ = this.taskSvc.getTasks(); // Refresh on navigation
+      });
   }
 
   onDelete(id: string) {

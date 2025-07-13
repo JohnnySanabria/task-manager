@@ -13,7 +13,8 @@
         </div>
         <div class="col-md-4">
           <p class="list-group-item-text">
-            <strong>Due:</strong> {{ task.dueDate | date }}
+            <strong>Due:</strong>
+            {{ task.dueDate | date : "MM/dd/yyyy" : "UTC" }}
           </p>
           <p class="list-group-item-text">
             <strong>Status:</strong> {{ task.status }}
