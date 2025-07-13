@@ -61,4 +61,16 @@ export class TaskFormComponent {
       });
     }
   }
+
+  onDelete() {
+    if (this.taskId) {
+      this.taskSvc.deleteTask(this.taskId).subscribe(() => {
+        this.router.navigate(['/tasks']);
+      });
+    }
+  }
+
+  onCancel() {
+    this.router.navigate(['/tasks']);
+  }
 }
